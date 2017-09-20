@@ -25,8 +25,16 @@ class Pancake extends React.Component {
     this.interval = setInterval(this.updateCounter, 1000);
   }
 
+  componentDidMount() {
+    this.startInterval()
+  }
+
   cleanUpInterval = () => {
     clearInterval(this.interval);
+  }
+
+  componentWillUnmount() {
+    this.cleanUpInterval()
   }
 
   flip = () => {
@@ -71,9 +79,9 @@ class Pancake extends React.Component {
             Time cooked on {`${firstSide ? 'first' : 'second'}`} side: {`${firstSide ? timeCooked : timeCooked - flippedAt}`}
           </p>
           <div>
-            { firstSide ? 
-              <button onClick={this.flip}>Flip me!</button> 
-              : 
+            { firstSide ?
+              <button onClick={this.flip}>Flip me!</button>
+              :
               <button onClick={this.takeItOff}>Take me off!</button>
             }
           </div>
